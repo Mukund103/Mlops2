@@ -44,7 +44,7 @@ Model=model()
 
 history=Model.fit(trainX,trainY,epochs=3)
 
-Model.save("/Code/mnist.h5")
+Model.save("/ws/mnist.h5")
 
 
 
