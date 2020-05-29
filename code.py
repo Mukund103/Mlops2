@@ -6,7 +6,7 @@ from keras.models import Sequential
 
 from keras.layers import Dense,Conv2D,MaxPooling2D,Flatten
 
-from keras.optimizers import SGD
+from keras.optimizers import adam
 
 (trainX,trainY),(testX,testY)=mnist.load_data()
 
@@ -27,9 +27,13 @@ def model():
   model.add(Conv2D(filters=32,kernel_size=(3,3),activation='relu',input_shape=(28,28,1)))
   model.add(MaxPooling2D(pool_size=(2,2)))
   model.add(Flatten())
-  model.add(Dense(units=100,activation='relu'))
+  model.add(Dense(units=526,activation='relu'))
+  model.add(Dense(units=258,activation='relu'))
+  model.add(Dense(units=128,activation='relu'))
+  model.add(Dense(units=64,activation='relu'))
+  model.add(Dense(units=32,activation='relu'))
   model.add(Dense(units=10,activation="softmax",))
-  model.compile(optimizer=SGD(lr=0.01),loss='categorical_crossentropy',metrics=['accuracy'])
+  model.compile(optimizer=adam(lr=0.001),loss='categorical_crossentropy',metrics=['accuracy'])
   return model
 def prep_pixels(train,test):
   train_norm=train.astype('float32')
@@ -42,14 +46,7 @@ trainX,testX=prep_pixels(trainX,testX)
 
 Model=model()
 
-history=Model.fit(trainX,trainY,epochs=3)
-
-Model.save("/ws/mnist.h5")
-
-
-
-
-
-
-
-
+history=Model.fit(trainX,trainY,epochs=10)
+a=Model.evaluate(testX,testY)
+with open("/code/output.txt",'w') as file:
+  file.write(str(a[1]))
