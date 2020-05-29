@@ -37,8 +37,8 @@ def model():
   return model
 
 Model=model()
-
-history=Model.fit(trainX,trainY,epochs=1)
+epoch=1
+history=Model.fit(trainX,trainY,epochs=epoch)
 a=Model.evaluate(testX,testY)
-with open("/Code/output.txt",'w') as file:
+with open("output.txt",'w') as file:
   file.write(str(a[1]))
