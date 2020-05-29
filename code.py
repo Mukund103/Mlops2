@@ -40,5 +40,5 @@ Model=model()
 
 history=Model.fit(trainX,trainY,epochs=1)
 a=Model.evaluate(testX,testY)
-with open("/code/output.txt",'w') as file:
+with open("output.txt",'w') as file:
   file.write(str(a[1]))
