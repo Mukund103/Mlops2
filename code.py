@@ -46,7 +46,7 @@ trainX,testX=prep_pixels(trainX,testX)
 
 Model=model()
 
-history=Model.fit(trainX,trainY,epochs=10)
+history=Model.fit(trainX,trainY,epochs=3)
 a=Model.evaluate(testX,testY)
 with open("/code/output.txt",'w') as file:
   file.write(str(a[1]))
