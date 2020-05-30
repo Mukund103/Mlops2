@@ -6,6 +6,9 @@ from keras.models import Sequential
 
 from keras.layers import Dense,Conv2D,MaxPooling2D,Flatten
 
+from keras.callbacks import EarlyStopping
+
+
 from keras.optimizers import adam
 
 (trainX,trainY),(testX,testY)=mnist.load_data()
@@ -38,7 +41,8 @@ def model():
 
 Model=model()
 epoch=1
-history=Model.fit(trainX,trainY,epochs=epoch)
+callback = EarlyStopping(monitor='loss', patience=1)
+history=Model.fit(trainX,trainY,epochs=epoch,callbacks=[callback])
 a=Model.evaluate(testX,testY)
 with open("output.txt",'w') as file:
   file.write(str(a[1]))
